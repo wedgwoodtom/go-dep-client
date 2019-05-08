@@ -36,8 +36,7 @@ func main() {
 		Region: aws.String(aws_region),
 	}))
 	sqsMessageQueue := awsClients.NewQueue(sqs.New(sess), sqs_queue)
-
-	messageProcessor := messageProcessor.New{messageQueue: sqsMessageQueue}
+	messageProcessor := messageProcessor.New(sqsMessageQueue)
 	go messageProcessor.Start()
 
 	printBanner()
